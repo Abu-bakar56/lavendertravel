@@ -1,0 +1,144 @@
+@media (max-width: 600px) {
+    .visa-9.pt-lg-4 {
+      height: 1150px !important;
+    }
+    .ticket-9.pt-lg-4 {
+        height: 1200px !important;
+      }
+      .general-9.pt-lg-4{
+        height: 730px !important;
+      }
+      .Insurance-9.pt-lg-4 {
+        height: 1050px !important;
+      }
+      .navbar .navbar-brand {
+        position: absolute;
+        font-size: 20px !important;
+        margin-top: 5px !important;
+   
+      }
+
+      .theme-switch-wrapper{
+        display: none;
+      }
+      
+    
+    
+
+      .navbar .navbar-toggler{
+      
+        margin-left: 260px !important;
+        margin-bottom: 10px !important;
+      }
+      
+  }
+  
+  @media (max-width: 600px) {
+    
+    .ticket-9.pt-lg-4 {
+        height: 1150px !important;
+      }
+  }
+
+  @media (min-width: 350px) {
+    
+    .navbar .navbar-brand {
+        position: absolute;
+        font-size: 15px !important;
+        margin-top: 5px !important;
+   
+      }
+
+      .theme-switch-wrapper{
+        display: none;
+      }
+      
+    
+    
+
+      .navbar .navbar-toggler{
+      
+        margin-left: 200px !important;
+        margin-bottom: 10px !important;
+      }
+      
+  }
+  
+  @media (min-width: 350px) {
+    
+    .navbar .navbar-brand {
+        position: absolute;
+        font-size: 22px !important;
+        margin-top: 5px !important;
+   
+      }
+
+      .theme-switch-wrapper{
+        display: none;
+      }
+      
+    
+    
+
+      .navbar .navbar-toggler{
+      
+        margin-left: 300px !important;
+        margin-bottom: 10px !important;
+      }
+    
+      
+  }
+
+  @media (min-width: 420px) {
+    
+    .navbar .navbar-brand {
+        position: absolute;
+        font-size: 22px !important;
+        margin-top: 5px !important;
+   
+      }
+
+      .theme-switch-wrapper{
+        display: none;
+      }
+      
+    
+    
+
+      .navbar .navbar-toggler{
+      
+        margin-left: 350px !important;
+        margin-bottom: 10px !important;
+      }
+      
+  }
+
+  @media (min-width: 430px) {
+    
+    #im {
+      
+position: absolute !important;
+        height: 40px important;
+        margin-bottom: 10px !important;
+   
+      }
+
+      #hr {
+        position: absolute !important;
+        font-size: 25px !important;
+        margin-left: 200px !important;
+        margin-bottom: 100px !important  ;
+   
+      }
+
+     
+    
+    
+
+      .navbar .navbar-toggler{
+      
+        margin-left: 300px !important;
+        margin-bottom: 10px !important;
+      }
+      
+  }

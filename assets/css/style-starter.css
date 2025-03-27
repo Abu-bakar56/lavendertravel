@@ -5203,6 +5203,7 @@ input[type="button"].btn-block {
     margin-left: -15px;
   }
 
+ 
   .card-deck .card {
     flex: 1 0 0%;
     margin-right: 15px;
@@ -5220,6 +5221,7 @@ input[type="button"].btn-block {
     display: flex;
     flex-flow: row wrap;
   }
+  
 
   .card-group > .card {
     flex: 1 0 0%;
@@ -5609,6 +5611,8 @@ a.badge-dark.focus {
   background-color: #e9ecef;
   border-radius: 0.3rem;
 }
+
+
 
 @media (min-width: 576px) {
   .jumbotron {
@@ -17642,6 +17646,12 @@ h3.hny-title.two {
     margin-top: 0;
     margin-bottom: 10px;
   }
+  
+
+  .contacts-9 pt-lg-4{
+    height: 1600px;
+  }
 }
 
 /*# sourceMappingURL=style-freedom.css.map */
+
