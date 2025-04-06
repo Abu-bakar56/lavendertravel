@@ -15,12 +15,14 @@
       .search-btn p{
         display: none;
       }
-      .para {
-        font-size: 12px;
-      }
-      .refresh-btn{
-        margin-left: 5px;
-      }
+      .refresh-btn i{
+
+        
+     
+        margin-bottom: 60px;
+       
+    }
+     
   }
   
   
