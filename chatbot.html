@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AI Travel Assistant | Lavender Travel & Tourism</title>
+    <link rel="icon" href="assets\images\logo.jpg" type="image/png">
+     <!-- google fonts -->  
+    <link href="//fonts.googleapis.com/css2?family=Castoro:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="//fonts.gstatic.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+    <style>
+        /* Custom styles for AI Assistant page */
+        .ai-assistant-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .service-card {
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: none;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .service-card .card-body {
+            padding: 30px;
+        }
+        
+        .service-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #8a2be2; /* Lavender color */
+        }
+        
+        .chatbot-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 50px;
+        }
+        
+        .chatbot-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .chatbot-messages {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .bot-message {
+            background-color: #e6e6fa; /* Light lavender */
+            border-bottom-left-radius: 5px;
+            align-self: flex-start;
+        }
+        
+        .user-message {
+            background-color: #8a2be2; /* Lavender */
+            color: white;
+            border-bottom-right-radius: 5px;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .chatbot-input {
+            display: flex;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+        }
+        
+        .chatbot-input button {
+            margin-left: 10px;
+            border-radius: 30px;
+            padding: 10px 20px;
+            background-color: #8a2be2;
+            border: none;
+            color: white;
+        }
+
+        .search-btn{
+          background-color: #333;
+        }
+        
+        .ai-features {
+            margin-top: 50px;
+        }
+        
+        .feature-box {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: #8a2be2;
+            margin-bottom: 20px;
+        }
+
+        /* Floating Chatbot Styling */
+        .floating-chatbot-container {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex; /* Visible by default */
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .floating-chatbot-header {
+            background: #6f42c1;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .floating-chatbot-header h6 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .floating-chatbot-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .floating-chatbot-message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .floating-chatbot-message.bot {
+            justify-content: flex-start;
+        }
+
+        .floating-chatbot-message.user {
+            justify-content: flex-end;
+        }
+
+        .floating-chatbot-message .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #6f42c1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .floating-chatbot-message .message {
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+
+        .floating-chatbot-message.bot .message {
+            background: #e9ecef;
+        }
+
+        .floating-chatbot-message.user .message {
+            background: #6f42c1;
+            color: #fff;
+        }
+
+        .floating-chatbot-footer {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+        }
+
+        .floating-chatbot-footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        .floating-chatbot-footer button {
+            background: #6f42c1;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .floating-chatbot-footer button:hover {
+            background: #5a32a3;
+        }
+
+        /* Message Button Styling */
+        .message-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #6f42c1;
+            color: #fff;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            display: none; /* Hidden by default */
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .message-btn:hover {
+            background: #5a32a3;
+        }
+
+        .message-btn span {
+            margin-right: 10px;
+        }
+
+        /* Search Button Styling */
+        .search-btn {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* .search-btn:hover {
+            background: #555;
+        } */
+
+        .search-btn i {
+            margin-right: 5px;
+        }
+#ttnn{
+background-color: #333;
+}
+        /* Refresh Button Styling */
+        .refresh-btn {
+            background: transparent;
+            border: none;
+            color: #6f42c1;
+            font-size: 18px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .close-btn {
+         background: transparent; 
+            border: none; 
+            color: #ffffff;
+            font-size: 18px;
+            cursor: pointer;
+        
+        }
+.close-btn:hover
+{
+  color: #5a32a3;
+}
+        .refresh-btn:hover {
+            color: #5a32a3;
+        }
+
+        .floating-chatbot-header .refresh-btn {
+            color: #fff;
+            position: static;
+            transform: none;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header id="site-header" class="fixed-top">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg stroke ">
+        <a class="navbar-brand" id="im"   href="#index.html">
+          <img src="assets\images\logo.jpg" alt="Your logo" title="Your logo" style="height:75px; width: 100px; margin-right:50px;" />
+        </a>
+        <h5 style="margin-right: 100px;">
+          <a class="navbar-brand" id="hr" style="color: blueviolet; font-size: 25px;" href="index.html">
+            Lavender Travel & Tourism
+          </a>
+        </h5>
+                
+        <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+            data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+            <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02" style="margin-top: 5px;">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Inquiry
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="ticketinquiry.html">Ticket Inquiry</a></li>
+                    <br>
+                    <li><a class="dropdown-item" href="visainquiry.html">Visa Inquiry</a></li>
+                    <br>
+                    <li><a class="dropdown-item" href="generalinquiry.html">General Inquiry</a></li>
+                    <br>
+                    <li><a class="dropdown-item" href="visainsurance.html">Visa Insurance</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="ai-assistant.html">AI Assistant</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+                <!-- <li class="nav-item mr-lg-3 mr-4" title="Search"><a href="#search" class="search-btn">
+                  <span class="fa fa-search" aria-hidden="true"></span></a></li> -->
+              <!--/search-right-->
+              <!-- search popup -->
+              <!-- <div id="search" class="pop-overlay">
+                <div class="popup">
+                  <form action="#" method="GET" class="w3l-hnyform d-sm-flex">
+                    <input type="search" placeholder="Search.." name="search" required="required" autofocus>
+                    <button type="submit">Search</button>
+                    <a class="close" href="#url">×</a>
+                  </form>
+                </div>
+              </div> -->
+              <!-- /search popup -->
+              <!--//search-right-->
+            </ul>
+        </div>
+        <!-- toggle switch for light and dark theme -->
+        <!-- <div class="mobile-position">
+            <nav class="navigation">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <div class="mode-container">
+                            <i class="gg-sun"></i>
+                            <i class="gg-moon"></i>
+                        </div>
+                    </label>
+                </div>
+            </nav>
+        </div> -->
+        <!-- //toggle switch for light and dark theme -->
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <section class="w3l-about-breadcrumb text-center">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+      <div class="container py-2">
+        <h2 class="title">AI Travel Assistant</h2>
+        <ul class="breadcrumbs-custom-path mt-2">
+          <li><a href="index.html">Home</a></li>
+          <li class="active"><span class="fa fa-arrow-right mx-2"></span> AI Assistant</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Assistant Section -->
+  <section class="ai-assistant-section">
+    <div class="container">
+      <div class="section-title text-center mb-5">
+        <h5 class="sub-title">Smart Travel Solutions</h5>
+        <h3 class="hny-title">Your Personal AI Travel Assistant</h3>
+        <p class="mt-3">Get instant help with your travel plans, bookings, and inquiries through our intelligent AI assistant.</p>
+      </div>
+      
+      <!-- Service Cards -->
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="card service-card">
+            <div class="card-body text-center">
+              <div class="service-icon">
+                <i class="fas fa-plane"></i>
+              </div>
+              <h4 class="card-title">Flight Tickets</h4>
+              <p class="card-text">Find the best flight deals and book tickets instantly with our AI assistant processes for any country.</p>
+              <a href="ticketinquiry.html" class="btn btn-primary mt-3">Book Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="card service-card">
+            <div class="card-body text-center">
+              <div class="service-icon">
+                <i class="fas fa-passport"></i>
+              </div>
+              <h4 class="card-title">Visa Services</h4>
+              <p class="card-text">Get guidance on visa requirements and application processes for any country.</p>
+              <a href="visainquiry.html" class="btn btn-primary mt-3">Apply Now</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="card service-card">
+            <div class="card-body text-center">
+              <div class="service-icon">
+                <i class="fas fa-hotel"></i>
+              </div>
+              <h4 class="card-title">Hotel Bookings</h4>
+              <p class="card-text">Discover perfect accommodations tailored to your preferences and budget.</p>
+              <a href="generalinquiry.html" class="btn btn-primary mt-3">Find Hotels</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Chatbot Section -->
+      <div class="chatbot-container">
+        <div class="chatbot-header">
+          <h3>Travel Assistant Chat</h3>
+          <p>Ask me anything about travel, bookings, or destinations</p>
+          <button class="refresh-btn" onclick="refreshChatbot('chatbot-messages')"><i class="fas fa-sync-alt"></i></button>
+        </div>
+        
+        <div class="chatbot-messages d-flex flex-column" id="chatbot-messages">
+          <div class="message bot-message">
+            Hey there! I'm your Lavender Travel AI Assistant. How can I help you today?
+          </div>
+          <!-- More messages will be added here dynamically -->
+        </div>
+        
+        <div class="chatbot-input">
+          <input type="text" id="user-input" placeholder="Type your message here..." class="form-control">
+          <button class="search-btn" id="ttnn" ><i class="fas fa-globe"></i> Search </button>
+          <button id="send-button" class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+      
+      <!-- AI Features -->
+      <div class="ai-features">
+        <div class="section-title text-center mb-5">
+          <h3 class="hny-title">What Our AI Assistant Can Do</h3>
+        </div>
+        
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <i class="fas fa-search-location"></i>
+              </div>
+              <h4>Destination Finder</h4>
+              <p>Get personalized destination options based on your preferences.</p>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <h4>Itinerary Planning</h4>
+              <p>Let our AI create a perfect travel itinerary tailored just for you.</p>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <i class="fas fa-question-circle"></i>
+              </div>
+              <h4>24/7 Support</h4>
+              <p>Get instant answers to all your travel-related questions anytime, anywhere.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Chatbot
+  Message Button -->
+  <!-- <button class="message-btn" id="messageBtn">
+    <span class="fa fa-comment"></span> Message
+  </button> -->
+
+  <!-- Floating Chatbot Container -->
+  <!-- <div class="floating-chatbot-container" id="floatingChatbotContainer">
+    <div class="floating-chatbot-header">
+      <h6><span class="fa fa-robot mr-2"></span> Chatbot</h6>
+      <button class="refresh-btn" style="margin-left: 100px;" onclick="refreshFloatingChatbot()"><i class="fas fa-sync-alt"></i></button>
+      <button class="close-btn" id="closeBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="floating-chatbot-body" id="floatingChatbotBody">
+      <div class="floating-chatbot-message bot">
+        <div class="avatar">🤖</div>
+        <div class="message">Hey there! 👋 How can I help you today?</div>
+      </div>
+      <div class="floating-chatbot-message user">
+        <div class="message">Hello there!</div>
+      </div>
+      <div class="floating-chatbot-message bot">
+        <div class="avatar">🤖</div>
+        <div class="message">Hello! How can I help you today?</div>
+      </div>
+    </div>
+    <div class="floating-chatbot-footer">
+      <input type="text" placeholder="Message..." id="floatingChatbotInput">
+      <button class="send-btn" id="floatingChatbotSendBtn"><i class="fas fa-paper-plane"></i></button>
+      <button class="search-btn" ><i class="fas fa-globe"></i> </button>
+    </div>
+  </div> -->
+
+  <!-- Footer Section -->
+  <section class="w3l-footer">
+    <footer class="footer-28">
+      <div class="footer-bg-layer">
+        <div class="container py-lg-3">
+          <div class="row footer-top-28">
+            <div class="col-lg-6 col-md-5 footer-list-28 mt-5">
+              <h6 class="footer-title-28">Contact information</h6>
+              <ul>
+                <li>
+                  <p><strong>Address</strong> : #135 block, Barnard St. Brooklyn, London 10036, UK</p>
+                </li>
+                <li>
+                  <p><strong>Phone</strong> : <a href="tel:+(12)234-11-24">+(12)234-11-24</a></p>
+                </li>
+                <li>
+                  <p><strong>Email</strong> : <a href="mailto:example@mail.com">example@mail.com</a></p>
+                </li>
+              </ul>
+  
+              <div class="main-social-footer-28 mt-3">
+                <ul class="social-icons">
+                  <li class="facebook">
+                    <a href="#link" title="Facebook">
+                      <span class="fa fa-facebook" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  <li class="twitter">
+                    <a href="#link" title="Twitter">
+                      <span class="fa fa-twitter" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  <li class="dribbble">
+                    <a href="#link" title="Dribbble">
+                      <span class="fa fa-dribbble" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                  <li class="google">
+                    <a href="#link" title="Google">
+                      <span class="fa fa-google" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-7">
+              <div class="row">
+                <div class="col-sm-4 col-6 footer-list-28 mt-5">
+                  <h6 class="footer-title-28">Company</h6>
+                  <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog Posts</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="#Packages">Packages</a></li>
+                  </ul>
+                </div>
+                <div class="col-sm-4 col-6 footer-list-28 mt-5">
+                  <h6 class="footer-title-28">Quick Links</h6>
+                  <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#signup">Create account</a></li>
+                    <li><a href="#learn">Our Branches</a></li>
+                    <li><a href="#feedback">Site Feedack</a></li>
+                  </ul>
+                </div>
+                <div class="col-sm-4 footer-list-28 mt-5">
+                  <h6 class="footer-title-28">Support</h6>
+                  <ul>
+                    <li><a href="#URL">Destinations</a></li>
+                    <li><a href="#URL">Our Guides</a></li>
+                    <li><a href="#URL">Support</a></li>
+                    <li><a href="#URL">Help</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="midd-footer-28 align-center py-lg-4 py-3 mt-5">
+          <div class="container">
+            <p class="copy-footer-28 text-center"> © 2025 Design & Developed by  <a
+              href="https://abubakar56.onrender.com/" target="_blank">
+              AbuBakar Shahzad </a>
+              | All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+      ⤴
+    </button>
+    <script>
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction()
+      };
+  
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          document.getElementById("movetop").style.display = "block";
+        } else {
+          document.getElementById("movetop").style.display = "none";
+        }
+      }
+  
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    </script>
+    <!-- /move top -->
+  </section>
+
+  <!-- Chatbot Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const messagesContainer = document.getElementById('chatbot-messages');
+      const userInput = document.getElementById('user-input');
+      const sendButton = document.getElementById('send-button');
+      const ChatbotSearchBtn = document.querySelector('.search-btn');
+      
+      // Sample responses for the chatbot
+      const botResponses = [
+        "I can help you with flight bookings, hotel reservations, and visa information.",
+        "For flight inquiries, please tell me your departure city, destination, and travel dates.",
+        "We offer visa services for over 50 countries. Which country are you interested in?",
+        "I can recommend hotels based on your budget and preferences. What's your price range?",
+        "Our travel experts can create a customized itinerary for you. Where would you like to go?",
+        "For urgent inquiries, you can also contact our support team at +(12)234-11-24."
+      ];
+
+
+      let count = 0;
+
+ChatbotSearchBtn.addEventListener('click', () => {
+  alert('Search functionality coming soon! Please type your query for now.');
+
+  if (count % 2 === 0) {
+    ChatbotSearchBtn.style.backgroundColor = '#8a2be2';
+  } else {
+    ChatbotSearchBtn.style.backgroundColor = '#333';
+  }
+
+  count++;
+});
+
+
+
+      
+      // Function to add a message to the chat
+      function addMessage(message, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+        messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+        messageDiv.textContent = message;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+      
+      // Function to get a random bot response
+      function getBotResponse() {
+        return botResponses[Math.floor(Math.random() * botResponses.length)];
+      }
+      
+      // Handle send button click for embedded chatbot
+      sendButton.addEventListener('click', function() {
+        const message = userInput.value.trim();
+        if (message) {
+          addMessage(message, true);
+          userInput.value = '';
+          
+          // Simulate bot thinking
+          setTimeout(function() {
+            addMessage(getBotResponse(), false);
+          }, 1000);
+        }
+      });
+      
+      // Handle Enter key press for embedded chatbot
+      userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          sendButton.click();
+        }
+      });
+
+      // Function to refresh the embedded chatbot
+      window.refreshChatbot = function(containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = `
+          <div class="message bot-message">
+            Hey there! I'm your Lavender Travel AI Assistant. How can I help you today?
+          </div>
+        `;
+      };
+
+      // Floating Chatbot Script
+      const floatingChatbotBody = document.getElementById('floatingChatbotBody');
+      const floatingChatbotInput = document.getElementById('floatingChatbotInput');
+      const floatingChatbotSendBtn = document.getElementById('floatingChatbotSendBtn');
+      const floatingChatbotSearchBtn = document.querySelector('.floating-chatbot-footer .search-btn');
+      const floatingChatbotContainer = document.getElementById('floatingChatbotContainer');
+      const messageBtn = document.getElementById('messageBtn');
+      const closeBtn = document.getElementById('closeBtn');
+
+      // Toggle Floating Chatbot Visibility
+      function toggleChatbot() {
+        console.log('toggleChatbot called'); // Debugging
+        console.log('Current display of chatbot:', floatingChatbotContainer.style.display); // Debugging
+        if (floatingChatbotContainer.style.display === 'flex' || floatingChatbotContainer.style.display === '') {
+          floatingChatbotContainer.style.display = 'none';
+          messageBtn.style.display = 'flex'; // Show the message button when chatbot is closed
+          console.log('Chatbot closed, message button shown'); // Debugging
+        } else {
+          floatingChatbotContainer.style.display = 'flex';
+          messageBtn.style.display = 'none'; // Hide the message button when chatbot is open
+          console.log('Chatbot opened, message button hidden'); // Debugging
+        }
+      }
+
+      // Attach event listeners for opening and closing the floating chatbot
+      messageBtn.addEventListener('click', toggleChatbot);
+      closeBtn.addEventListener('click', toggleChatbot);
+
+      // Floating Chatbot Message Handling
+      floatingChatbotSendBtn.addEventListener('click', () => {
+        const userMessage = floatingChatbotInput.value.trim();
+        if (userMessage) {
+          // Add user message to chat
+          const userMsgDiv = document.createElement('div');
+          userMsgDiv.classList.add('floating-chatbot-message', 'user');
+          userMsgDiv.innerHTML = `<div class="message">${userMessage}</div>`;
+          floatingChatbotBody.appendChild(userMsgDiv);
+
+          // Simulate bot response
+          setTimeout(() => {
+            const botMsgDiv = document.createElement('div');
+            botMsgDiv.classList.add('floating-chatbot-message', 'bot');
+            botMsgDiv.innerHTML = `
+              <div class="avatar">🤖</div>
+              <div class="message">${getBotResponse()}</div>
+            `;
+            floatingChatbotBody.appendChild(botMsgDiv);
+
+            // Scroll to bottom
+            floatingChatbotBody.scrollTop = floatingChatbotBody.scrollHeight;
+          }, 1000);
+
+          // Clear input
+          floatingChatbotInput.value = '';
+        }
+      });
+
+      // Allow sending message with Enter key for floating chatbot
+      floatingChatbotInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          floatingChatbotSendBtn.click();
+        }
+      });
+
+      // Search Button Functionality (Placeholder)
+      floatingChatbotSearchBtn.addEventListener('click', () => {
+        alert('Search functionality coming soon! Please type your query for now.');
+      });
+
+      // Function to refresh the floating chatbot
+      window.refreshFloatingChatbot = function() {
+        floatingChatbotBody.innerHTML = `
+          <div class="floating-chatbot-message bot">
+            <div class="avatar">🤖</div>
+            <div class="message">Hey there! 👋 How can I help you today?</div>
+          </div>
+        `;
+      };
+    });
+  </script>
+  
+  <!-- Template JavaScript -->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/theme-change.js"></script>
+  <!-- js for portfolio lightbox -->
+  <!--/MENU-JS-->
+  <script>
+    $(window).on("scroll", function () {
+      var scroll = $(window).scrollTop();
+
+      if (scroll >= 80) {
+        $("#site-header").addClass("nav-fixed");
+      } else {
+        $("#site-header").removeClass("nav-fixed");
+      }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function () {
+      $("header").toggleClass("active");
+    });
+    $(document).on("ready", function () {
+      if ($(window).width() > 991) {
+        $("header").removeClass("active");
+      }
+      $(window).on("resize", function () {
+        if ($(window).width() > 991) {
+          $("header").removeClass("active");
+        }
+      });
+    });
+  </script>
+  <!--//MENU-JS-->
+
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
