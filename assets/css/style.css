@@ -12,14 +12,14 @@
         height: 1050px !important;
       }
     
-      
-  }
-  
-  @media (max-width: 600px) {
-    
-    .ticket-9.pt-lg-4 {
-        height: 1150px !important;
+      .search-btn {
+        font-size: 10px ;
+      }
+      .para {
+        font-size: 12px;
       }
   }
+  
+  
 
  
