@@ -12,11 +12,14 @@
         height: 1050px !important;
       }
     
-      .search-btn {
-        font-size: 10px ;
+      .search-btn p{
+        display: none;
       }
       .para {
         font-size: 12px;
+      }
+      .refresh-btn{
+        margin-left: 5px;
       }
   }
   
