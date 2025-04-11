@@ -4712,6 +4712,7 @@ input[type="button"].btn-block {
 .navbar-toggler:hover,
 .navbar-toggler:focus {
   text-decoration: none;
+  box-shadow: 0 0 0 ;
 }
 
 .navbar-toggler-icon {
@@ -4720,6 +4721,7 @@ input[type="button"].btn-block {
   height: 1.5em;
   vertical-align: middle;
   content: "";
+  
   background: no-repeat center center;
   background-size: 100% 100%;
 }
@@ -14911,6 +14913,7 @@ nav ul li a:hover {
   .navbar-toggler-icon.fa {
     line-height: 1.2em;
     color: #fff;
+    
     line-height: 34px;
     background-color: blueviolet;
     border-radius: 5px;
